@@ -27,14 +27,28 @@ export default class UserCards extends Component {
     try {
       const [userId, cardResponse] = await axios.all([
         AuthService.getUserIdByUsername(this.state.username),
-        CardService.getAllCardsByUsername(this.state.username),
+        CardService.getAllCardsByUsername(this.state.username).then(
+          (res) => {
+            this.setState({
+              isEmpty: false,
+              isLoading: false,
+              cardList: res.cards
+            })
+          }, error => {
+            if (error.response) {
+              this.setState({
+                isEmpty: true,
+                isLoading: false
+              });
+            }
+          }
+        ),
       ]);
 
       this.setState({
-        isEmpty: false,
         userId: userId,
         cardList: cardResponse.cards,
-        isLoading: false,
+        isLoading: false
       });
     } catch (error) {
       console.log(error.message);
@@ -47,14 +61,14 @@ export default class UserCards extends Component {
     const { cardList, isLoading, isEmpty } = this.state;
 
     if (isLoading) {
-      if (!isEmpty) {
-        return (
-          <div align="center">
-            <h4>Fetching Cards...</h4>
-            <div class="spinner-border"></div>
-          </div>
-        );
-      } else {
+      return (
+        <div align="center">
+          <h4>Fetching Cards...</h4>
+          <div class="spinner-border"></div>
+        </div>
+      );
+    }
+    if (isEmpty) {
         return (
           <div>
             <span>No Saved Cards</span>
@@ -70,7 +84,6 @@ export default class UserCards extends Component {
             </ButtonGroup>
           </div>
         );
-      }
     }
 
     const fetchedCards = cardList.map((card) => {
