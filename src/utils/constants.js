@@ -7,8 +7,8 @@ const prod = {
 
 const dev = {
   url: {
-    API_URL: 'http://localhost:5000',
-    CARD_API_URL: 'http://localhost:5000/cards/'
+    API_URL: 'https://cred-t3-backend.herokuapp.com',
+    CARD_API_URL: 'https://cred-t3-backend.herokuapp.com/cards/'
   }
 }
 
