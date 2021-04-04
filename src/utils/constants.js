@@ -1,7 +1,7 @@
 const prod = {
   url: {
-    API_URL: 'http://credbackend-env.eba-i66gtx8n.ap-south-1.elasticbeanstalk.com',
-    CARD_API_URL: 'http://credbackend-env.eba-i66gtx8n.ap-south-1.elasticbeanstalk.com/cards/'
+    API_URL: 'https://cred-t3-backend.herokuapp.com',
+    CARD_API_URL: 'https://cred-t3-backend.herokuapp.com/cards/'
   }
 }
 
